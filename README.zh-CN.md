@@ -123,3 +123,7 @@ ln -sfn /path/to/Tabbit-Devtools-Skill/skills/tabbit-devtools ~/.agents/skills/t
 - `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`
 
 只有这两个位置都没有时，才会认为当前环境缺少可用的 Tabbit 浏览器。
+
+## 开源协议
+
+本仓库使用 [MIT License](./LICENSE)。

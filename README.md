@@ -122,3 +122,7 @@ The default search order is:
 - `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`
 
 Only when neither location exists should the environment be treated as missing a usable Tabbit browser.
+
+## License
+
+This repository is released under the [MIT License](./LICENSE).
