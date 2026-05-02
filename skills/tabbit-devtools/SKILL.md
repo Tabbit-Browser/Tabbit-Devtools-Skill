@@ -28,16 +28,17 @@ Do not restate a full `agent-browser` manual here. Use these commands as the def
 
 ## Quick Path
 
-1. Read `~/Library/Application Support/Tabbit/DevToolsActivePort` first.
-2. If that file does not exist, read `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`.
-3. Use both lines in that file:
+1. Detect the platform and search for `DevToolsActivePort`:
+   - macOS: `~/Library/Application Support/Tabbit/DevToolsActivePort` first, then `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`
+   - Windows: `%LOCALAPPDATA%\Tabbit Browser\User Data\DevToolsActivePort` first, then `%APPDATA%\Tabbit\User Data\DevToolsActivePort`
+2. Use both lines in that file:
    - line 1: TCP port
    - line 2: browser path such as `/devtools/browser/<id>`
-4. Build the full browser endpoint as `ws://127.0.0.1:<port><path>`.
-5. Prefer that `wsEndpoint` over `http://127.0.0.1:<port>`. Tabbit may expose the browser WebSocket while `/json/version` and `/json/list` still return `404`.
-6. Prefer [scripts/run_agent_browser_on_tabbit.py](scripts/run_agent_browser_on_tabbit.py) for actual browser actions. It injects the live `wsEndpoint` into `agent-browser --cdp ...`.
-7. Use [scripts/discover_tabbit_cdp.py](scripts/discover_tabbit_cdp.py) when you only need structured connection facts.
-8. Once connected, use the full normal `agent-browser` workflow for page operations.
+3. Build the full browser endpoint as `ws://127.0.0.1:<port><path>`.
+4. Prefer that `wsEndpoint` over `http://127.0.0.1:<port>`. Tabbit may expose the browser WebSocket while `/json/version` and `/json/list` still return `404`.
+5. Prefer [scripts/run_agent_browser_on_tabbit.py](scripts/run_agent_browser_on_tabbit.py) for actual browser actions. It injects the live `wsEndpoint` into `agent-browser --cdp ...`.
+6. Use [scripts/discover_tabbit_cdp.py](scripts/discover_tabbit_cdp.py) when you only need structured connection facts.
+7. Once connected, use the full normal `agent-browser` workflow for page operations.
 
 ## Workflow
 
@@ -52,7 +53,7 @@ Do not restate a full `agent-browser` manual here. Use these commands as the def
 - This skill solves the connection problem, not the general browser-operation problem.
 - Return structured connection data first, then any short explanatory note.
 - Prefer the lightest possible discovery path: `DevToolsActivePort` and the derived browser WebSocket endpoint.
-- Search the macOS `Tabbit` support directory first, then `Tabbit Browser`.
+- Search the macOS `Tabbit` support directory first, then `Tabbit Browser`. On Windows, search `%LOCALAPPDATA%\Tabbit Browser\User Data` first, then `%APPDATA%\Tabbit\User Data`.
 - Prefer the full `wsEndpoint` over a raw port because Tabbit may not expose HTTP discovery routes.
 - Once a Tabbit task has started through `run_agent_browser_on_tabbit.py`, keep using that same wrapper path for the rest of the task unless the user explicitly asks otherwise.
 - Once connected, use standard `agent-browser` patterns for everything else.
