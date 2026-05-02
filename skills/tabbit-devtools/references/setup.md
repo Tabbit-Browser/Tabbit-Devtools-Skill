@@ -6,6 +6,7 @@ Tabbit should be treated as a Chromium-based browser, but the recommended client
 
 `agent-browser` is the browser-operation layer in this setup. This skill only discovers the live Tabbit endpoint and forwards it into `agent-browser --cdp ...`.
 On macOS, discovery first checks `~/Library/Application Support/Tabbit/DevToolsActivePort`, then `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`.
+On Windows, discovery first checks `%LOCALAPPDATA%\Tabbit Browser\User Data\DevToolsActivePort`, then `%APPDATA%\Tabbit\User Data\DevToolsActivePort`.
 
 ## Lowest-Cost Path
 
@@ -54,7 +55,7 @@ Common `agent-browser` actions in this setup:
 - `fill @e5 <text>`
 - `press Enter`
 
-If the helper cannot find `DevToolsActivePort` in either the `Tabbit` or `Tabbit Browser` support directory, ask the user to confirm Tabbit is open and that `tabbit://inspect/#remote-debugging` is enabled.
+If the helper cannot find `DevToolsActivePort` in any of the support directories, ask the user to confirm Tabbit is open and that `tabbit://inspect/#remote-debugging` is enabled.
 
 If you only need the raw endpoint details, use `discover_tabbit_cdp.py` directly.
 If you need to actually operate the browser, prefer `run_agent_browser_on_tabbit.py` so the `--cdp` wiring stays consistent.

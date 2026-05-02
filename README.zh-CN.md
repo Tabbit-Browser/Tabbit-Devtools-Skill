@@ -119,10 +119,12 @@ ln -sfn /path/to/Tabbit-Devtools-Skill/skills/tabbit-devtools ~/.agents/skills/t
 
 默认搜索顺序是：
 
-- `~/Library/Application Support/Tabbit/DevToolsActivePort`
-- `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`
+- `~/Library/Application Support/Tabbit/DevToolsActivePort`（macOS）
+- `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`（macOS）
+- `%LOCALAPPDATA%\Tabbit Browser\User Data\DevToolsActivePort`（Windows）
+- `%APPDATA%\Tabbit\User Data\DevToolsActivePort`（Windows）
 
-只有这两个位置都没有时，才会认为当前环境缺少可用的 Tabbit 浏览器。
+只有以上位置都不存在时，才会认为当前环境缺少可用的 Tabbit 浏览器。
 
 ## 开源协议
 
