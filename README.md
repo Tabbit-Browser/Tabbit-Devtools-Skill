@@ -118,10 +118,12 @@ It does not implement its own bridge or browser automation layer. Actual page op
 
 The default search order is:
 
-- `~/Library/Application Support/Tabbit/DevToolsActivePort`
-- `~/Library/Application Support/Tabbit Browser/DevToolsActivePort`
+- `~/Library/Application Support/Tabbit/DevToolsActivePort` (macOS)
+- `~/Library/Application Support/Tabbit Browser/DevToolsActivePort` (macOS)
+- `%LOCALAPPDATA%\Tabbit Browser\User Data\DevToolsActivePort` (Windows)
+- `%APPDATA%\Tabbit\User Data\DevToolsActivePort` (Windows)
 
-Only when neither location exists should the environment be treated as missing a usable Tabbit browser.
+Only when none of these locations exist should the environment be treated as missing a usable Tabbit browser.
 
 ## License
 

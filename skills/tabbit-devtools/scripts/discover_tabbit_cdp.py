@@ -14,10 +14,20 @@ DEFAULT_POLL_INTERVAL_SECONDS = 0.25
 
 def default_active_port_files() -> List[pathlib.Path]:
     base = pathlib.Path.home() / "Library" / "Application Support"
-    return [
+    candidates = [
         base / "Tabbit" / "DevToolsActivePort",
         base / "Tabbit Browser" / "DevToolsActivePort",
     ]
+
+    # Windows paths
+    localappdata = os.environ.get("LOCALAPPDATA")
+    appdata = os.environ.get("APPDATA")
+    if localappdata:
+        candidates.append(pathlib.Path(localappdata) / "Tabbit Browser" / "User Data" / "DevToolsActivePort")
+    if appdata:
+        candidates.append(pathlib.Path(appdata) / "Tabbit" / "User Data" / "DevToolsActivePort")
+
+    return candidates
 
 
 def default_active_port_file() -> pathlib.Path:
